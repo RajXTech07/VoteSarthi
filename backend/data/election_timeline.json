@@ -1,0 +1,65 @@
+{
+  "election_name": "Indian General Election 2024",
+  "total_phases": 7,
+  "result_date": "2024-06-04",
+  "last_updated": "2024-06-05",
+  "data_source": "Election Commission of India (eci.gov.in)",
+  "phases": [
+    {
+      "phase": 1,
+      "date": "2024-04-19",
+      "end_date": "2024-04-25",
+      "states": ["Rajasthan", "Uttarakhand", "Arunachal Pradesh", "Meghalaya", "Sikkim", "Mizoram", "Nagaland", "Manipur", "Tripura", "Tamil Nadu", "Andaman & Nicobar", "Lakshadweep", "Puducherry"],
+      "seats": 102,
+      "user_action": "Voting for Phase 1 is complete. Check results on the ECI website."
+    },
+    {
+      "phase": 2,
+      "date": "2024-04-26",
+      "end_date": "2024-05-06",
+      "states": ["Kerala", "Karnataka", "Rajasthan", "Madhya Pradesh", "Maharashtra", "Uttar Pradesh", "Tripura", "Assam", "Bihar", "Chhattisgarh", "Jammu & Kashmir", "Manipur", "West Bengal"],
+      "seats": 89,
+      "user_action": "Voting for Phase 2 is complete. Check results on the ECI website."
+    },
+    {
+      "phase": 3,
+      "date": "2024-05-07",
+      "end_date": "2024-05-12",
+      "states": ["Goa", "Gujarat", "Karnataka", "Madhya Pradesh", "Maharashtra", "Uttar Pradesh", "Chhattisgarh", "Bihar", "Assam", "West Bengal", "Dadra & Nagar Haveli", "Daman & Diu"],
+      "seats": 94,
+      "user_action": "Voting for Phase 3 is complete. Check results on the ECI website."
+    },
+    {
+      "phase": 4,
+      "date": "2024-05-13",
+      "end_date": "2024-05-19",
+      "states": ["Andhra Pradesh", "Telangana", "Madhya Pradesh", "Maharashtra", "Uttar Pradesh", "Bihar", "Jharkhand", "Odisha", "West Bengal", "Jammu & Kashmir"],
+      "seats": 96,
+      "user_action": "Voting for Phase 4 is complete. Check results on the ECI website."
+    },
+    {
+      "phase": 5,
+      "date": "2024-05-20",
+      "end_date": "2024-05-24",
+      "states": ["Uttar Pradesh", "Bihar", "West Bengal", "Jharkhand", "Odisha", "Maharashtra", "Jammu & Kashmir", "Ladakh"],
+      "seats": 49,
+      "user_action": "Voting for Phase 5 is complete. Check results on the ECI website."
+    },
+    {
+      "phase": 6,
+      "date": "2024-05-25",
+      "end_date": "2024-05-31",
+      "states": ["Delhi", "Haryana", "Uttar Pradesh", "Bihar", "West Bengal", "Jharkhand", "Odisha"],
+      "seats": 57,
+      "user_action": "Voting for Phase 6 is complete. Check results on the ECI website."
+    },
+    {
+      "phase": 7,
+      "date": "2024-06-01",
+      "end_date": "2024-06-03",
+      "states": ["Punjab", "Himachal Pradesh", "Chandigarh", "Uttar Pradesh", "Bihar", "West Bengal", "Jharkhand", "Odisha"],
+      "seats": 57,
+      "user_action": "Voting for Phase 7 is complete. Results were announced on June 4, 2024."
+    }
+  ]
+}

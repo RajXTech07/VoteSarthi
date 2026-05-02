@@ -1,0 +1,74 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "question": "Who can vote in Indian elections?",
+      "answer": "Any Indian citizen who is 18 years or older on the qualifying date (January 1 of the year of revision of electoral roll) and is registered as a voter can vote. You must have a valid Voter ID (EPIC) or any approved photo identity document.",
+      "category": "eligibility",
+      "keywords": ["vote", "eligible", "who can vote", "age", "citizen"]
+    },
+    {
+      "id": 2,
+      "question": "How do I register to vote?",
+      "answer": "You can register online at the National Voter Service Portal (voters.eci.gov.in) by filling Form 6. You'll need your photo, address proof, and age proof. You can also register offline at your nearest ERO (Electoral Registration Officer) office.",
+      "category": "registration",
+      "keywords": ["register", "voter id", "form 6", "enrollment", "new voter"]
+    },
+    {
+      "id": 3,
+      "question": "What is NOTA?",
+      "answer": "NOTA stands for 'None Of The Above'. It is an option on the EVM that allows a voter to officially register a vote of rejection for all candidates. If NOTA gets the highest votes, the candidate with the next highest votes still wins — NOTA does not invalidate the election.",
+      "category": "voting",
+      "keywords": ["nota", "none of the above", "reject"]
+    },
+    {
+      "id": 4,
+      "question": "What is an EVM?",
+      "answer": "EVM stands for Electronic Voting Machine. It is a portable electronic device used in Indian elections since 1999. The EVM has two units — the Control Unit with the polling officer and the Ballot Unit in the voting compartment. You press the button next to your chosen candidate to vote. EVMs are standalone, not connected to any network, and are tamper-proof.",
+      "category": "voting",
+      "keywords": ["evm", "electronic voting machine", "machine", "device"]
+    },
+    {
+      "id": 5,
+      "question": "What is VVPAT?",
+      "answer": "VVPAT stands for Voter Verifiable Paper Audit Trail. It is a machine attached to the EVM that prints a paper slip showing the candidate name and symbol you voted for. The slip is visible for 7 seconds through a transparent window before it drops into a sealed box. This allows voters to verify that their vote was recorded correctly.",
+      "category": "voting",
+      "keywords": ["vvpat", "paper trail", "verification", "audit"]
+    },
+    {
+      "id": 6,
+      "question": "What documents do I need to vote?",
+      "answer": "You need any one of the 12 approved photo identity documents: EPIC (Voter ID Card), Aadhaar Card, Passport, Driving License, PAN Card, Smart Card issued by RGI under NPR, MNREGA Job Card, Health Insurance Smart Card, Bank/Post Office Passbook with photo, Service Identity Card (for govt employees), Pension document with photo, or MP/MLA/MLC identity card.",
+      "category": "documents",
+      "keywords": ["documents", "id", "identity", "proof", "aadhaar", "passport"]
+    },
+    {
+      "id": 7,
+      "question": "Can I vote if I lost my Voter ID?",
+      "answer": "Yes! You can use any of the other 11 approved photo identity documents to vote. Your name just needs to be in the electoral roll. To get a duplicate Voter ID, apply at the nearest ERO office or through the Voter Helpline App.",
+      "category": "documents",
+      "keywords": ["lost", "missing", "duplicate", "voter id lost"]
+    },
+    {
+      "id": 8,
+      "question": "What is the Model Code of Conduct?",
+      "answer": "The Model Code of Conduct (MCC) is a set of guidelines issued by the Election Commission of India that political parties and candidates must follow during elections. It covers general conduct, meetings, processions, polling day behavior, and use of government machinery. The MCC comes into effect once elections are announced and remains until results are declared.",
+      "category": "general",
+      "keywords": ["model code", "conduct", "rules", "guidelines", "mcc"]
+    },
+    {
+      "id": 9,
+      "question": "How are election results counted?",
+      "answer": "On the counting day, EVMs are brought to counting centers. Each EVM's votes are tallied under the supervision of a Returning Officer with representatives from all candidates present. VVPAT slips from randomly selected booths (5 per constituency) are matched with EVM results. The candidate with the most votes in a constituency wins (first-past-the-post system).",
+      "category": "results",
+      "keywords": ["count", "result", "winner", "tally", "counting"]
+    },
+    {
+      "id": 10,
+      "question": "What happens on election day?",
+      "answer": "Polling stations open at 7:00 AM and close at 6:00 PM (times may vary by region). Voters go to their assigned booth, show their ID, get ink on their finger, enter the voting compartment, press the button on the EVM for their candidate, and leave. If you are in the queue before 6:00 PM, you will be allowed to vote. It is a holiday for most workers.",
+      "category": "voting",
+      "keywords": ["election day", "polling", "voting day", "what happens"]
+    }
+  ]
+}
