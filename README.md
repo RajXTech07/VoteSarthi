@@ -1,89 +1,167 @@
 # 🗳️ VoteSarthi
 
-**VoteSarthi** is an intelligent election assistant web application that helps users understand the voting process in India through personalized guidance, step-by-step instructions, and interactive tools.
+**VoteSarthi** is an intelligent election assistant that helps users understand the voting process in India through personalized guidance, clear steps, and interactive tools.
+
+The goal is simple:
+👉 **Remove confusion and tell users exactly what to do next to vote.**
 
 ---
 
-## 🚀 Features
+## 🚀 Why VoteSarthi?
 
-### ✅ Core Features
+Many users—especially first-time voters—struggle with:
 
-* **Eligibility Checker**
-  Check if a user is eligible to vote based on age and voter ID status.
+* Eligibility confusion
+* Registration process
+* Voting steps
+* Election timelines
 
-* **Guided Voting Steps**
-  Personalized step-by-step process to prepare for voting.
-
-* **Election Timeline**
-  Visual representation of election phases with current status.
-
-* **Next Action Engine**
-  Clearly tells users what they should do next.
+VoteSarthi solves this by acting as a **step-by-step guide**, not just an information app.
 
 ---
 
-### 🧠 Smart Features
+## ✨ Key Features
 
-* **AI-Powered Explanation**
-  Simplifies complex election information into easy language.
+### 🟢 1. Eligibility Checker
 
-* **Simulation Mode**
-  Walkthrough of voting day process.
+* Determines if a user can vote
+* Based on:
 
-* **What-If Scenarios**
-  Handles cases like lost voter ID, relocation, etc.
+  * Age
+  * Voter ID status
+
+👉 Provides a clear **status + next action**
 
 ---
 
-### 🛠 Utility Features
+### 🪜 2. Guided Voting Steps
 
-* **Polling Booth Finder**
-  Helps users locate their voting booth.
+* Personalized step-by-step process
+* Filters steps based on user condition
+* Avoids showing unnecessary information
 
-* **Documents Guide**
-  Required documents and instructions.
+---
 
-* **FAQ Assistant**
-  Quick answers to common questions.
+### 📅 3. Election Timeline
+
+* Displays election phases
+* Highlights **current phase**
+* Explains what it means for the user
+
+---
+
+### 🎯 4. Next Action Engine (Core Feature)
+
+* Tells user exactly:
+
+  > “What should I do now?”
+
+Examples:
+
+* Apply for voter ID
+* Check polling booth
+* Wait until eligible
+
+---
+
+### 🧠 5. AI-Powered Explanation
+
+* Converts complex election info into simple language
+* Used for:
+
+  * Eligibility explanation
+  * Step simplification
+  * Timeline interpretation
+
+---
+
+### 🎮 6. Simulation Mode
+
+* Walkthrough of voting day
+* Helps users understand:
+
+  * what happens at polling booth
+  * how voting works
+
+---
+
+### 🔄 7. What-If Scenarios
+
+Handles real-life situations like:
+
+* Lost voter ID
+* Moving to another city
+* Name missing from voter list
+
+---
+
+### 📍 8. Polling Booth Finder
+
+* Helps users locate where to vote
+
+---
+
+### 📄 9. Documents Guide
+
+* Lists required documents
+* Explains what is accepted
+
+---
+
+### ❓ 10. FAQ Assistant
+
+* Answers common election-related questions
+* Uses structured data + AI explanation
 
 ---
 
 ## 🧱 Tech Stack
 
-* **Frontend:** Next.js (React)
-* **Backend:** FastAPI (Python)
-* **AI:** GeminiApi
+### Frontend
+
+* **Next.js (React)**
+* Modern component-based UI
+
+### Backend
+
+* **FastAPI (Python)**
+* Clean API-based architecture
+
+### AI Integration
+
+* **Gemini API**
+* Used only for explanation (not decision-making)
+
+---
+
+## 🧠 Architecture
+
+📄 Detailed system design:
+👉 [View Architecture](./ARCHITECTURE.md)
 
 ---
 
 ## 📁 Project Structure
 
 ```bash
-Election-Assistant/
+VoteSarthi/
 │
-├── frontend/    # Next.js frontend
-├── backend/     # FastAPI backend
+├── frontend/        # Next.js application (UI)
+├── backend/         # FastAPI server (logic & APIs)
+│   ├── routes/      # API endpoints
+│   ├── services/    # Business logic
+│   ├── data/        # Static datasets
+│   └── models/      # Schemas
+│
 ├── README.md
-```
-```
-```
-## 🧠 Architecture
-
-This project follows a layered architecture:
-
-* Frontend (Next.js)
-* Backend (FastAPI)
-* Services Layer (business logic)
-* AI Layer (GeminiAPi integration)
-
-📄 Full details: [ARCHITECTURE.md](./ARCHITECTURE.md)
+├── ARCHITECTURE.md
 ```
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone Repository
+### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/VoteSarthi.git
@@ -92,7 +170,30 @@ cd VoteSarthi
 
 ---
 
-### 2. Frontend Setup
+## 🔧 Backend Setup (FastAPI)
+
+```bash
+cd backend
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+### ▶ Run backend
+
+```bash
+python -m uvicorn app:app --reload
+```
+
+Server runs at:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 🎨 Frontend Setup (Next.js)
 
 ```bash
 cd frontend
@@ -100,43 +201,54 @@ npm install
 npm run dev
 ```
 
----
+Frontend runs at:
 
-### 3. Backend Setup
-
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn app:app --reload
+```
+http://localhost:3000
 ```
 
 ---
 
 ## 🔐 Environment Variables
 
-Create `.env.local` inside `frontend/`:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
+### Backend `.env`
 ```
+
+```
+
+---
+
+
+---
+
+## 🔄 Data Flow
+
+1. User enters details
+2. Frontend sends request to backend
+3. Backend processes logic
+4. AI enhances explanation (optional)
+5. Response sent back to frontend
+6. UI displays structured guidance
+
+---
+
+## 🎯 Design Principles
+
+* **Clarity over complexity**
+* **Action-oriented responses**
+* **Deterministic backend logic**
+* **AI used only for explanation**
+* **User-first experience**
+
+---
+
 
 ---
 
 ## 🌐 Data Source
 
-Election-related data is aligned with
-Election Commission of India
-
----
-
-## 🎯 Purpose
-
-VoteSarthi aims to:
-
-* Simplify the voting process
-* Help first-time voters
-* Provide clear guidance and next steps
-* Reduce confusion around elections
+Election-related logic is aligned with:
+**Election Commission of India**
 
 ---
 
@@ -148,13 +260,20 @@ MIT License
 
 ## 👨‍💻 Author
 
-Developed by **Raj Kumar**
+**Raj**
 
 ---
 
-## ⭐ Future Enhancements
+## 🚀 Future Improvements
 
 * Multi-language support
 * Notifications & reminders
-* Advanced personalization
+* Better personalization
 * Mobile app version
+
+---
+
+## ⭐ Final Note
+
+VoteSarthi is not just an informational app.
+It is designed to act as a **decision assistant**, helping users confidently complete the voting process.
