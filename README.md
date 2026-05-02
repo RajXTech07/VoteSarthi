@@ -66,6 +66,7 @@ Election-Assistant/
 ├── README.md
 ```
 ```
+```
 ## 🧠 Architecture
 
 This project follows a layered architecture:
