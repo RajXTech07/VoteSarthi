@@ -1,5 +1,6 @@
 import os
 import logging
+from typing import Optional
 from dotenv import load_dotenv
 
 load_dotenv() # Load keys from .env if present
@@ -7,15 +8,17 @@ load_dotenv() # Load keys from .env if present
 logger = logging.getLogger("ai_provider")
 
 # ── Provider state ────────────────────────────────────────
-_gemini_client = None
-_openai_client = None
-_active_provider = None  # "gemini" | "openai" | None
+_gemini_client: Optional[object] = None
+_openai_client: Optional[object] = None
+_active_provider: Optional[str] = None  # "gemini" | "openai" | None
 
 # ── 1. Try Google Gemini ──────────────────────────────────
+_gemini_types = None
 try:
     from google import genai
-    from google.genai import types
+    from google.genai import types as gemini_types
 
+    _gemini_types = gemini_types
     _gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
     if _gemini_key:
         _gemini_client = genai.Client(api_key=_gemini_key)
@@ -76,16 +79,18 @@ def call_ai(prompt: str, max_tokens: int = 250) -> str | None:
 def _call_gemini(prompt: str) -> str | None:
     """Call Google Gemini."""
     try:
+        if _gemini_client is None or _gemini_types is None:
+            return None
         full_prompt = f"{SYSTEM_PROMPT}\n\n---\n\n{prompt}"
-        response = _gemini_client.models.generate_content(
+        response = _gemini_client.models.generate_content(  # type: ignore
             model="gemini-2.0-flash",
             contents=full_prompt,
-            config=types.GenerateContentConfig(
+            config=_gemini_types.GenerateContentConfig(
                 temperature=0.2,
                 max_output_tokens=250,
             ),
         )
-        return response.text.strip()
+        return response.text.strip() if response and response.text else None
     except Exception as e:
         logger.error("❌ Gemini call failed: %s", str(e))
         return None
@@ -94,7 +99,7 @@ def _call_gemini(prompt: str) -> str | None:
 def _call_openai(prompt: str, max_tokens: int) -> str | None:
     """Call OpenAI."""
     try:
-        response = _openai_client.chat.completions.create(
+        response = _openai_client.chat.completions.create(  # type: ignore
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
