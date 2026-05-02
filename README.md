@@ -52,7 +52,7 @@
 
 * **Frontend:** Next.js (React)
 * **Backend:** FastAPI (Python)
-* **AI:** OpenAI API
+* **AI:** GeminiApi
 
 ---
 
@@ -64,6 +64,19 @@ Election-Assistant/
 ├── frontend/    # Next.js frontend
 ├── backend/     # FastAPI backend
 ├── README.md
+```
+```
+```
+## 🧠 Architecture
+
+This project follows a layered architecture:
+
+* Frontend (Next.js)
+* Backend (FastAPI)
+* Services Layer (business logic)
+* AI Layer (GeminiAPi integration)
+
+📄 Full details: [ARCHITECTURE.md](./ARCHITECTURE.md)
 ```
 
 ---
