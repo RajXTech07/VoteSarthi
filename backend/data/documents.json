@@ -1,0 +1,182 @@
+{
+  "last_updated": "2024-06-05",
+  "source": "Election Commission of India — Approved Photo Identity Documents",
+  "documents": [
+    {
+      "id": "epic",
+      "name": "Voter ID Card (EPIC)",
+      "icon": "🪪",
+      "status": "accepted",
+      "use_for": ["voting", "registration"],
+      "conditions": null,
+      "tip": "This is the primary document. If you have it, you're fully set.",
+      "how_to_get": "Apply via Form 6 on voters.eci.gov.in or at your nearest ERO office.",
+      "apply_link": "https://voters.eci.gov.in"
+    },
+    {
+      "id": "aadhaar",
+      "name": "Aadhaar Card",
+      "icon": "🆔",
+      "status": "accepted",
+      "use_for": ["voting", "registration"],
+      "conditions": "Must have a photograph. e-Aadhaar (downloaded PDF) is also accepted.",
+      "tip": "Aadhaar is accepted both for voting and as address proof for registration.",
+      "how_to_get": "Apply at any Aadhaar Seva Kendra or online at uidai.gov.in.",
+      "apply_link": "https://myaadhaar.uidai.gov.in/"
+    },
+    {
+      "id": "passport",
+      "name": "Passport",
+      "icon": "🛂",
+      "status": "accepted",
+      "use_for": ["voting", "registration"],
+      "conditions": "Must be valid (not expired). Expired passports are NOT accepted for voting.",
+      "tip": "Works for both identity and address proof during registration.",
+      "how_to_get": "Apply at Passport Seva Kendra or online at passportindia.gov.in.",
+      "apply_link": "https://www.passportindia.gov.in/"
+    },
+    {
+      "id": "driving_license",
+      "name": "Driving License",
+      "icon": "🚗",
+      "status": "accepted",
+      "use_for": ["voting", "registration"],
+      "conditions": "Must have a photograph. Learner's license is NOT accepted.",
+      "tip": "Both physical and DigiLocker versions are valid.",
+      "how_to_get": "Apply at your nearest RTO or via parivahan.gov.in.",
+      "apply_link": "https://parivahan.gov.in/"
+    },
+    {
+      "id": "pan",
+      "name": "PAN Card",
+      "icon": "💳",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Accepted ONLY as photo identity at the polling booth. Cannot be used as address proof for voter registration.",
+      "tip": "Carry a backup document if your name on PAN doesn't match the voter list.",
+      "how_to_get": "Apply via NSDL or UTIITSL portals.",
+      "apply_link": "https://www.onlineservices.nsdl.com/paam/endUserRegisterContact.html"
+    },
+    {
+      "id": "service_id",
+      "name": "Govt. Service Identity Card",
+      "icon": "🏢",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Must be issued by Central/State Government, PSU, or Public Limited Company. Must have a photo.",
+      "tip": "If you're a government employee, this is sufficient on its own.",
+      "how_to_get": "Issued by your employer (government department).",
+      "apply_link": null
+    },
+    {
+      "id": "bank_passbook",
+      "name": "Bank/Post Office Passbook",
+      "icon": "🏦",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Must have a photograph of the account holder on the passbook.",
+      "tip": "Many older passbooks don't have photos — check yours before election day.",
+      "how_to_get": "Request a photo-updated passbook from your bank branch.",
+      "apply_link": null
+    },
+    {
+      "id": "mnrega",
+      "name": "MNREGA Job Card",
+      "icon": "👷",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Must have a photograph. Valid only if issued by the State Government.",
+      "tip": "Common in rural areas — fully accepted at polling booths.",
+      "how_to_get": "Apply at your Gram Panchayat office.",
+      "apply_link": "https://nrega.nic.in/"
+    },
+    {
+      "id": "health_card",
+      "name": "Health Insurance Smart Card (RSBY)",
+      "icon": "🏥",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Only the smart card with photo is accepted, not paper receipts.",
+      "tip": "The Ayushman Bharat card (PMJAY) with photo is also accepted.",
+      "how_to_get": "Issued by your State Health Department or at empanelled hospitals.",
+      "apply_link": "https://pmjay.gov.in/"
+    },
+    {
+      "id": "pension",
+      "name": "Pension Document with Photo",
+      "icon": "👴",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Must have a photograph of the pensioner. Ex-servicemen pension docs are also valid.",
+      "tip": "If you're a senior citizen with a pension, carry this along with your voter slip.",
+      "how_to_get": "Issued by your pension disbursing authority.",
+      "apply_link": null
+    },
+    {
+      "id": "npr_card",
+      "name": "NPR Smart Card (issued by RGI)",
+      "icon": "📇",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Must be the smart card issued by the Registrar General of India under NPR.",
+      "tip": "This is different from the Aadhaar card — both are separately accepted.",
+      "how_to_get": "Issued during NPR enumeration by the RGI.",
+      "apply_link": "https://censusindia.gov.in/"
+    },
+    {
+      "id": "mp_mla_card",
+      "name": "MP/MLA/MLC Identity Card",
+      "icon": "🏛️",
+      "status": "accepted",
+      "use_for": ["voting"],
+      "conditions": "Only for current or former Members of Parliament or State Legislature.",
+      "tip": "Must be the official card issued by Parliament/Legislature Secretariat.",
+      "how_to_get": "Issued by the Parliament or State Legislature.",
+      "apply_link": null
+    },
+    {
+      "id": "ration_card",
+      "name": "Ration Card",
+      "icon": "📋",
+      "status": "not_accepted",
+      "use_for": [],
+      "conditions": "Ration cards are NOT in the list of 12 approved photo identity documents for voting.",
+      "tip": "However, ration cards CAN be used as address proof when applying for voter registration (Form 6).",
+      "how_to_get": null,
+      "apply_link": "https://nfsa.gov.in/"
+    },
+    {
+      "id": "school_id",
+      "name": "School/College ID Card",
+      "icon": "🎓",
+      "status": "not_accepted",
+      "use_for": [],
+      "conditions": "Student ID cards are NOT accepted at the polling booth for identity verification.",
+      "tip": "Use your Aadhaar or passport instead. If you're 18+, register for a Voter ID.",
+      "how_to_get": null,
+      "apply_link": null
+    },
+    {
+      "id": "birth_certificate",
+      "name": "Birth Certificate",
+      "icon": "📜",
+      "status": "conditional",
+      "use_for": ["registration"],
+      "conditions": "NOT accepted at polling booths. But accepted as age proof when applying for voter registration (Form 6).",
+      "tip": "Useful during registration if you don't have other age proof documents.",
+      "how_to_get": null,
+      "apply_link": "https://crsorgi.gov.in/"
+    },
+    {
+      "id": "utility_bill",
+      "name": "Electricity/Water/Gas Bill",
+      "icon": "💡",
+      "status": "conditional",
+      "use_for": ["registration"],
+      "conditions": "NOT accepted at polling booths. But accepted as address proof for voter registration (Form 6).",
+      "tip": "The bill must be recent (within 3 months) and in your name or family member's name.",
+      "how_to_get": null,
+      "apply_link": null
+    }
+  ]
+}
