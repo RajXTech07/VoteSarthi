@@ -1,27 +1,30 @@
 import os
 import logging
+from dotenv import load_dotenv
+
+load_dotenv() # Load keys from .env if present
 
 logger = logging.getLogger("ai_provider")
 
 # ── Provider state ────────────────────────────────────────
-_gemini_model = None
+_gemini_client = None
 _openai_client = None
 _active_provider = None  # "gemini" | "openai" | None
 
 # ── 1. Try Google Gemini ──────────────────────────────────
 try:
-    import google.generativeai as genai
+    from google import genai
+    from google.genai import types
 
     _gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
     if _gemini_key:
-        genai.configure(api_key=_gemini_key)
-        _gemini_model = genai.GenerativeModel("gemini-2.0-flash")
+        _gemini_client = genai.Client(api_key=_gemini_key)
         _active_provider = "gemini"
         logger.info("✅ Gemini AI ready (key: %s...%s)", _gemini_key[:8], _gemini_key[-4:])
     else:
         logger.info("⚠️  No GEMINI_API_KEY found, trying OpenAI...")
 except ImportError:
-    logger.info("⚠️  google-generativeai not installed, trying OpenAI...")
+    logger.info("⚠️  google-genai not installed, trying OpenAI...")
 
 # ── 2. Try OpenAI (fallback) ─────────────────────────────
 if not _active_provider:
@@ -74,12 +77,13 @@ def _call_gemini(prompt: str) -> str | None:
     """Call Google Gemini."""
     try:
         full_prompt = f"{SYSTEM_PROMPT}\n\n---\n\n{prompt}"
-        response = _gemini_model.generate_content(
-            full_prompt,
-            generation_config={
-                "temperature": 0.2,
-                "max_output_tokens": 250,
-            },
+        response = _gemini_client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=full_prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.2,
+                max_output_tokens=250,
+            ),
         )
         return response.text.strip()
     except Exception as e:
@@ -111,6 +115,6 @@ def get_provider_status() -> dict:
     """Return the current AI provider status for health checks."""
     return {
         "active_provider": _active_provider,
-        "gemini_ready": _gemini_model is not None,
+        "gemini_ready": _gemini_client is not None,
         "openai_ready": _openai_client is not None,
     }
