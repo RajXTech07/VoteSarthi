@@ -65,6 +65,18 @@ Election-Assistant/
 ├── backend/     # FastAPI backend
 ├── README.md
 ```
+```
+## 🧠 Architecture
+
+This project follows a layered architecture:
+
+* Frontend (Next.js)
+* Backend (FastAPI)
+* Services Layer (business logic)
+* AI Layer (OpenAI integration)
+
+📄 Full details: [ARCHITECTURE.md](./ARCHITECTURE.md)
+```
 
 ---
 
