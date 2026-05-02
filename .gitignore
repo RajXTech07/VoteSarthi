@@ -12,3 +12,5 @@ frontend/.env.local
 
 # misc
 .DS_Store
+
+.venv/

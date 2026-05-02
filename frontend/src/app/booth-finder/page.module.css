@@ -1,0 +1,329 @@
+.page {
+  padding-bottom: var(--section-padding);
+}
+
+/* Search Form */
+.searchForm {
+  max-width: 700px;
+  margin: 0 auto 32px;
+  padding: 36px;
+}
+
+.searchHeader {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.searchIcon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.searchHeader h3 {
+  margin-bottom: 4px;
+}
+
+.searchHeader p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.inputRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.field {
+  flex: 1;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--border-radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  outline: none;
+  transition: var(--transition);
+}
+
+.input:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.12);
+}
+
+.input::placeholder {
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.orDivider {
+  flex-shrink: 0;
+  padding-bottom: 12px;
+}
+
+.orDivider span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Results */
+.results {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Info Banner */
+.infoBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 24px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 153, 51, 0.1),
+    rgba(255, 153, 51, 0.04)
+  );
+  border: 1px solid rgba(255, 153, 51, 0.25);
+  border-left: 4px solid var(--saffron);
+}
+
+.infoIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.infoBody strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.infoBody p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Map */
+.mapCard {
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  aspect-ratio: 16 / 9;
+  min-height: 400px;
+}
+
+.mapCard:hover {
+  transform: none;
+}
+
+.mapFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ── Booth Actions — Method Grid ── */
+.boothActions {
+  padding: 28px 32px;
+}
+.boothActions:hover {
+  transform: none;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.sectionDesc {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+
+.methodGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.methodCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border-radius: var(--border-radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+.methodCard:hover {
+  border-color: var(--saffron);
+  background: rgba(255, 153, 51, 0.05);
+  transform: translateY(-2px);
+}
+
+.methodBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(255, 153, 51, 0.15);
+  color: var(--saffron-light);
+  border: 1px solid rgba(255, 153, 51, 0.3);
+}
+
+.methodBadge[data-type="official"] {
+  background: rgba(19, 136, 8, 0.15);
+  color: var(--green);
+  border-color: rgba(19, 136, 8, 0.3);
+}
+
+.methodIcon {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.methodCard strong {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+}
+
+.methodCard p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Tips */
+.tipsCard {
+  padding: 28px 32px;
+}
+
+.tipsCard:hover {
+  transform: none;
+}
+
+.tipsTitle {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.tipsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tipsList li {
+  padding-left: 20px;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tipsList li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--saffron);
+  font-weight: 700;
+}
+
+.tipsList a {
+  color: var(--saffron-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tipsList a:hover {
+  color: var(--saffron);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .inputRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .orDivider {
+    padding-bottom: 0;
+    text-align: center;
+  }
+
+  .searchForm {
+    padding: 24px;
+  }
+
+  .methodGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mapCard {
+    min-height: 280px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .boothActions {
+    padding: 20px;
+  }
+}

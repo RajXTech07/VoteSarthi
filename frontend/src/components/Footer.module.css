@@ -1,0 +1,165 @@
+.footer {
+  margin-top: 120px;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(10, 14, 39, 0.6);
+  padding: 0 0 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Trust Bar */
+.trustBar {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px 24px;
+  margin: 0 -24px;
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.04), rgba(19, 136, 8, 0.03));
+  border-bottom: 1px solid var(--glass-border);
+  flex-wrap: wrap;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trustIcon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.trustLabel {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 1px;
+}
+
+.trustLink {
+  font-size: 0.85rem;
+  color: var(--saffron-light) !important;
+  font-weight: 500;
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+.trustLink:hover {
+  color: var(--saffron) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.trustValue {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Main Footer */
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding-top: 32px;
+}
+
+.brand {
+  max-width: 300px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.tagline {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.linkGroups {
+  display: flex;
+  gap: 64px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.group h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.group a {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.group a:hover {
+  color: var(--saffron-light);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--glass-border),
+    transparent
+  );
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.disclaimer {
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .trustBar {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+
+  .top {
+    flex-direction: column;
+  }
+
+  .linkGroups {
+    gap: 32px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
