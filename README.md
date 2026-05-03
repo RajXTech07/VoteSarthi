@@ -27,6 +27,7 @@ Many eligible voters skip voting due to:
 * ✅ **Eligibility Checker** (rule-based, deterministic)
 * 📋 **Personalized Voting Steps**
 * 📅 **Election Timeline Viewer**
+* 📍 **Google Maps polling booth**
 * 📄 **Required Documents Guide**
 * ❓ **FAQ Assistant**
 
@@ -170,7 +171,6 @@ Steps being implemented:
 * 🌐 Multi-language support (Hindi + regional)
 * 📊 User analytics integration
 * 🔔 Notification & reminder system
-* 📍 Google Maps polling booth integration
 * 📱 Mobile-first UI improvements
 
 ---
