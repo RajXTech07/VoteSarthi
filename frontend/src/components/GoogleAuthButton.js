@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useGoogleLogin, googleLogout } from "@react-oauth/google";
 import Image from "next/image";
+import { api } from "../lib/api";
 import styles from "./Navbar.module.css";
 
 export default function GoogleAuthButton() {
@@ -28,18 +29,11 @@ export default function GoogleAuthButton() {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         }).then(res => res.json());
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/auth/profile`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userInfo),
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          setUser(data.user);
-          localStorage.setItem("votesarthi_session", data.session_token);
-          localStorage.setItem("votesarthi_user", JSON.stringify(data.user));
-        }
+        const data = await api.googleProfileAuth(userInfo);
+        
+        setUser(data.user);
+        localStorage.setItem("votesarthi_session", data.session_token);
+        localStorage.setItem("votesarthi_user", JSON.stringify(data.user));
       } catch (err) {
         console.error("Auth error:", err);
       } finally {

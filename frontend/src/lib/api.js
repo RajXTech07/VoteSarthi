@@ -69,5 +69,11 @@ export const api = {
   // Document Validator
   getDocuments: () => request("/api/documents/"),
 
+  googleProfileAuth: (profile) =>
+    request("/api/auth/profile", {
+      method: "POST",
+      body: JSON.stringify(profile),
+    }),
+
   health: () => request("/api/health"),
 };
