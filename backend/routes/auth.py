@@ -40,6 +40,21 @@ async def google_auth(request: AuthRequest):
     except ValueError as e:
         raise HTTPException(status_code=401, detail=f"Invalid token: {str(e)}")
 
+@router.post("/profile", response_model=AuthResponse)
+async def google_profile_auth(profile: dict):
+    # This receives the profile directly from the frontend after it fetches it from Google
+    user = User(
+        email=profile.get("email", ""),
+        name=profile.get("name", ""),
+        picture=profile.get("picture", ""),
+        sub=profile.get("sub", profile.get("id", str(uuid.uuid4())))
+    )
+
+    session_token = str(uuid.uuid4())
+    sessions[session_token] = user
+
+    return AuthResponse(user=user, session_token=session_token)
+
 @router.get("/me", response_model=User)
 async def get_current_user(session_token: str):
     if session_token not in sessions:
