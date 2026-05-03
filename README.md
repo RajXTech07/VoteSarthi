@@ -62,7 +62,7 @@ Many eligible voters skip voting due to:
 
 ### AI Integration
 
-* OpenAI API (for explanation & assistance)
+* Google Gemini API (for explanation & assistance)
 
 ### Deployment
 
@@ -90,7 +90,11 @@ VoteSarthi/
 └── README.md
 ```
 
-📌 Detailed architecture → see `ARCHITECTURE.md`
+## 🧠 Architecture
+
+📄 Detailed system design:
+👉 [View Architecture](./ARCHITECTURE.md)
+
 
 ---
 
@@ -137,7 +141,7 @@ NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
 #### Backend (`.env`)
 
 ```env
-OPENAI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=your_openai_api_key
 ```
 
 ---
