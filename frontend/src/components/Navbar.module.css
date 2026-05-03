@@ -235,9 +235,16 @@
   }
 }
 
-/* Google Auth */
+/* Google Auth & Right Section */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .authWrapper {
-  margin-left: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .userProfile {

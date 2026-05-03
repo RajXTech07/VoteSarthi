@@ -9,6 +9,9 @@ AI Provider: Google Gemini (primary) → OpenAI (fallback) → deterministic
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from routes.eligibility import router as eligibility_router
 from routes.steps import router as steps_router

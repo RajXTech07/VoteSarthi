@@ -124,18 +124,20 @@ export default function Navbar() {
           })}
         </div>
 
-        <GoogleAuthButton />
+        <div className={styles.rightSection}>
+          <GoogleAuthButton />
 
-        <button
-          className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-          id="navbar-toggle"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+          <button
+            className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            id="navbar-toggle"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
     </nav>
   );
