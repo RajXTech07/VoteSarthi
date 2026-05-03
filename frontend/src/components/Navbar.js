@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
+import GoogleAuthButton from "./GoogleAuthButton";
 
 const navStructure = [
   { href: "/", label: "Home" },
@@ -122,6 +123,8 @@ export default function Navbar() {
             );
           })}
         </div>
+
+        <GoogleAuthButton />
 
         <button
           className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}

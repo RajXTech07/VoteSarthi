@@ -17,6 +17,7 @@ from routes.faq import router as faq_router
 from routes.explain import router as explain_router
 from routes.context import router as context_router
 from routes.documents import router as documents_router
+from routes.auth import router as auth_router
 
 app = FastAPI(
     title="VoteSarthi API",
@@ -41,6 +42,7 @@ app.include_router(faq_router)
 app.include_router(explain_router)
 app.include_router(context_router)
 app.include_router(documents_router)
+app.include_router(auth_router)
 
 
 @app.get("/api/health")

@@ -9,13 +9,17 @@ export const metadata = {
   keywords: "India elections, voter guide, VoteSarthi, voting steps, eligibility checker",
 };
 
+import AuthProvider from "@/components/AuthProvider";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

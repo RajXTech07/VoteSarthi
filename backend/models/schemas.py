@@ -2,6 +2,22 @@ from pydantic import BaseModel, Field
 from typing import Optional
 
 
+# ── Auth ─────────────────────────────────────────────────────
+
+class AuthRequest(BaseModel):
+    token: str = Field(..., description="Google ID Token")
+
+class User(BaseModel):
+    email: str
+    name: str
+    picture: Optional[str] = None
+    sub: str = Field(..., description="Google unique user ID")
+
+class AuthResponse(BaseModel):
+    user: User
+    session_token: str = Field(..., description="Internal session token")
+
+
 # ── Next Action (returned by every API) ──────────────────────
 
 class NextAction(BaseModel):
