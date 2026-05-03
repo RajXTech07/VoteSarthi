@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Literal
 
 
 # ── Auth ─────────────────────────────────────────────────────
@@ -73,7 +73,7 @@ class ExplainRequest(BaseModel):
     Unified request for AI explanations across all features.
     The 'context' field determines which prompt template is used.
     """
-    context: str = Field(
+    context: Literal["eligibility", "steps", "timeline"] = Field(
         ...,
         description="One of: eligibility, steps, timeline",
     )

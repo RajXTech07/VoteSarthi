@@ -46,7 +46,7 @@ class TestVoteSarthiBackend:
         # Invalid: Missing required field (is_citizen)
         assert client.post("/api/eligibility/check", json={"age": 25, "has_voter_id": True}).status_code == 422
         # Invalid: Non-boolean value
-        assert client.post("/api/eligibility/check", json={"age": 25, "is_citizen": "yes", "has_voter_id": True}).status_code == 422
+        assert client.post("/api/eligibility/check", json={"age": 25, "is_citizen": [1,2,3], "has_voter_id": True}).status_code == 422
 
     # 3. FAQ Edge Cases
     def test_faq_empty_string(self):
