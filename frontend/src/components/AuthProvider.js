@@ -3,11 +3,17 @@
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export default function AuthProvider({ children }) {
-  // Use a fallback client ID for local testing if the env var isn't set
-  // This is a dummy client ID that looks real but isn't.
-  // In production, this MUST be a valid Google Client ID.
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "123456789012-dummyclientid123456789012.apps.googleusercontent.com";
-  
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+
+  if (!clientId) {
+    // Fail loudly in development — never silently use a hardcoded value.
+    // Add NEXT_PUBLIC_GOOGLE_CLIENT_ID to your frontend/.env.local file.
+    throw new Error(
+      "[AuthProvider] NEXT_PUBLIC_GOOGLE_CLIENT_ID is not set. " +
+        "Add it to frontend/.env.local (local dev) or your deployment environment variables."
+    );
+  }
+
   return (
     <GoogleOAuthProvider clientId={clientId}>
       {children}
