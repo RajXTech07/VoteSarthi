@@ -4,7 +4,7 @@ VoteSarthi — FastAPI Backend
 Entry point. All business logic lives in services/.
 AI is only used for explanations, not decision-making.
 
-AI Provider: Google Gemini (primary) → OpenAI (fallback) → deterministic
+AI Provider: Google Gemini → deterministic fallback
 """
 
 from fastapi import FastAPI

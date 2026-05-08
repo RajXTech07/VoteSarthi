@@ -3,17 +3,16 @@ import logging
 from typing import Optional
 from dotenv import load_dotenv
 
-load_dotenv() # Load keys from .env if present
+load_dotenv()  # Load keys from .env if present
 
 logger = logging.getLogger("ai_provider")
 
 # ── Provider state ────────────────────────────────────────
 _gemini_client: Optional[object] = None
-_openai_client: Optional[object] = None
-_active_provider: Optional[str] = None  # "gemini" | "openai" | None
-
-# ── 1. Try Google Gemini ──────────────────────────────────
 _gemini_types = None
+_active_provider: Optional[str] = None  # "gemini" | None
+
+# ── Initialize Google Gemini ──────────────────────────────
 try:
     from google import genai
     from google.genai import types as gemini_types
@@ -25,30 +24,15 @@ try:
         _active_provider = "gemini"
         logger.info("✅ Gemini AI ready")
     else:
-        logger.info("⚠️  No GEMINI_API_KEY found, trying OpenAI...")
+        logger.warning("⚠️  No GEMINI_API_KEY found — AI features disabled")
 except ImportError:
-    logger.info("⚠️  google-genai not installed, trying OpenAI...")
-
-# ── 2. Try OpenAI (fallback) ─────────────────────────────
-if not _active_provider:
-    try:
-        from openai import OpenAI
-
-        _openai_key = os.getenv("OPENAI_API_KEY")
-        if _openai_key:
-            _openai_client = OpenAI(api_key=_openai_key)
-            _active_provider = "openai"
-            logger.info("✅ OpenAI ready")
-        else:
-            logger.warning("⚠️  No OPENAI_API_KEY found — AI features disabled")
-    except ImportError:
-        logger.warning("⚠️  openai package not installed — AI features disabled")
+    logger.warning("⚠️  google-genai not installed — AI features disabled")
 
 if not _active_provider:
     logger.warning("🔕 No AI provider available. App works fine — AI just adds clarity.")
 
 
-# ── System prompt (shared) ────────────────────────────────
+# ── System prompt ─────────────────────────────────────────
 
 SYSTEM_PROMPT = (
     "You are an assistant helping Indian voters understand elections.\n\n"
@@ -62,17 +46,15 @@ SYSTEM_PROMPT = (
 )
 
 
-# ── Unified call ──────────────────────────────────────────
+# ── AI call ───────────────────────────────────────────────
 
 def call_ai(prompt: str, max_tokens: int = 250) -> str | None:
     """
-    Call the active AI provider. Returns None if no provider is available.
+    Call Google Gemini. Returns None if the provider is unavailable.
     Never raises — all errors are caught and logged.
     """
     if _active_provider == "gemini":
         return _call_gemini(prompt)
-    elif _active_provider == "openai":
-        return _call_openai(prompt, max_tokens)
     return None
 
 
@@ -96,24 +78,6 @@ def _call_gemini(prompt: str) -> str | None:
         return None
 
 
-def _call_openai(prompt: str, max_tokens: int) -> str | None:
-    """Call OpenAI."""
-    try:
-        response = _openai_client.chat.completions.create(  # type: ignore
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=max_tokens,
-            temperature=0.2,
-        )
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        logger.error("❌ OpenAI call failed: %s", str(e))
-        return None
-
-
 # ── Status ────────────────────────────────────────────────
 
 def get_provider_status() -> dict:
@@ -121,5 +85,4 @@ def get_provider_status() -> dict:
     return {
         "active_provider": _active_provider,
         "gemini_ready": _gemini_client is not None,
-        "openai_ready": _openai_client is not None,
     }
