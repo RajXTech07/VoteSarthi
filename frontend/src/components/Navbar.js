@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
-import GoogleAuthButton from "./GoogleAuthButton";
+import AuthBadge from "./AuthBadge";
 
 const navStructure = [
   { href: "/", label: "Home" },
@@ -125,7 +125,7 @@ export default function Navbar() {
         </div>
 
         <div className={styles.rightSection}>
-          <GoogleAuthButton />
+          <AuthBadge />
 
           <button
             className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}

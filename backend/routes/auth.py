@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from models.schemas import AuthRequest, AuthResponse, User
+from models.schemas import AuthRequest, AuthResponse, User, OTPRequest, OTPVerifyRequest, ProfileUpdateRequest
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
@@ -12,6 +12,7 @@ CLIENT_ID = os.getenv("NEXT_PUBLIC_GOOGLE_CLIENT_ID") or os.getenv("GOOGLE_CLIEN
 # In-memory session store (for prototype simplicity)
 # In production, use Redis or a database
 sessions = {}
+otps = {}
 
 @router.post("/google", response_model=AuthResponse)
 async def google_auth(request: AuthRequest):
@@ -60,3 +61,44 @@ async def get_current_user(session_token: str):
     if session_token not in sessions:
         raise HTTPException(status_code=401, detail="Invalid session")
     return sessions[session_token]
+
+@router.post("/otp/send")
+async def send_otp(request: OTPRequest):
+    otp = "123456" # Fixed OTP for prototyping
+    otps[request.mobile_number] = otp
+    return {"message": "OTP sent successfully"}
+
+@router.post("/otp/verify", response_model=AuthResponse)
+async def verify_otp(request: OTPVerifyRequest):
+    if otps.get(request.mobile_number) != request.otp:
+        raise HTTPException(status_code=400, detail="Invalid OTP")
+    
+    # In a real app we would check if the user already exists in DB
+    # We look up existing session user if we wanted, but here we just create new
+    # Actually, iterate through sessions and find if user exists? No DB here.
+    user = User(
+        mobile_number=request.mobile_number,
+        name="",
+        sub=f"mob_{request.mobile_number}"
+    )
+    session_token = str(uuid.uuid4())
+    sessions[session_token] = user
+    return AuthResponse(user=user, session_token=session_token)
+
+@router.put("/profile", response_model=User)
+async def update_profile(session_token: str, profile_update: ProfileUpdateRequest):
+    if session_token not in sessions:
+        raise HTTPException(status_code=401, detail="Invalid session")
+    
+    user = sessions[session_token]
+    if profile_update.name is not None:
+        user.name = profile_update.name
+    if profile_update.gender is not None:
+        user.gender = profile_update.gender
+    if profile_update.dob is not None:
+        user.dob = profile_update.dob
+    if profile_update.email is not None:
+        user.email = profile_update.email
+    
+    sessions[session_token] = user
+    return user

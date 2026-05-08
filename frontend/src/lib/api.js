@@ -75,5 +75,23 @@ export const api = {
       body: JSON.stringify(profile),
     }),
 
+  sendOTP: (mobile_number) =>
+    request("/api/auth/otp/send", {
+      method: "POST",
+      body: JSON.stringify({ mobile_number }),
+    }),
+
+  verifyOTP: (mobile_number, otp) =>
+    request("/api/auth/otp/verify", {
+      method: "POST",
+      body: JSON.stringify({ mobile_number, otp }),
+    }),
+
+  updateProfile: (session_token, data) =>
+    request(`/api/auth/profile?session_token=${session_token}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+
   health: () => request("/api/health"),
 };

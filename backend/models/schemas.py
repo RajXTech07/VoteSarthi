@@ -8,14 +8,30 @@ class AuthRequest(BaseModel):
     token: str = Field(..., description="Google ID Token")
 
 class User(BaseModel):
-    email: str
-    name: str
+    email: Optional[str] = None
+    name: Optional[str] = None
     picture: Optional[str] = None
-    sub: str = Field(..., description="Google unique user ID")
+    sub: str = Field(..., description="Unique user ID")
+    mobile_number: Optional[str] = None
+    gender: Optional[str] = None
+    dob: Optional[str] = None
 
 class AuthResponse(BaseModel):
     user: User
     session_token: str = Field(..., description="Internal session token")
+
+class OTPRequest(BaseModel):
+    mobile_number: str
+
+class OTPVerifyRequest(BaseModel):
+    mobile_number: str
+    otp: str
+
+class ProfileUpdateRequest(BaseModel):
+    name: Optional[str] = None
+    gender: Optional[str] = None
+    dob: Optional[str] = None
+    email: Optional[str] = None
 
 
 # ── Next Action (returned by every API) ──────────────────────
