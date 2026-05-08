@@ -6,8 +6,9 @@ frontend/.next/
 backend/__pycache__/
 *.pyc
 
-# env
+# env — ignore real secrets, but track template
 .env*
+!.env.example
 frontend/.env.local
 
 # misc
