@@ -11,6 +11,7 @@ This is the "brain" — it makes the app feel like a smart assistant.
 """
 
 import json
+import os
 from datetime import date, datetime
 from pathlib import Path
 
@@ -282,8 +283,14 @@ def compute_smart_context(
         status_label = "Tell us about yourself to get personalized guidance"
 
     # Google Maps embed URL for polling booth
+    # Key is loaded from GOOGLE_MAPS_API_KEY env var — never hardcoded.
     maps_query = f"polling booth {state or ''} India".strip()
-    maps_embed_url = f"https://www.google.com/maps/embed/v1/search?q={maps_query.replace(' ', '+')}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+    _maps_key = os.getenv("GOOGLE_MAPS_API_KEY")
+    maps_embed_url = (
+        f"https://www.google.com/maps/embed/v1/search?q={maps_query.replace(' ', '+')}&key={_maps_key}"
+        if _maps_key
+        else None
+    )
 
     return {
         "user_status": status,

@@ -23,7 +23,7 @@ try:
     if _gemini_key:
         _gemini_client = genai.Client(api_key=_gemini_key)
         _active_provider = "gemini"
-        logger.info("✅ Gemini AI ready (key: %s...%s)", _gemini_key[:8], _gemini_key[-4:])
+        logger.info("✅ Gemini AI ready")
     else:
         logger.info("⚠️  No GEMINI_API_KEY found, trying OpenAI...")
 except ImportError:
@@ -38,7 +38,7 @@ if not _active_provider:
         if _openai_key:
             _openai_client = OpenAI(api_key=_openai_key)
             _active_provider = "openai"
-            logger.info("✅ OpenAI ready (key: %s...%s)", _openai_key[:8], _openai_key[-4:])
+            logger.info("✅ OpenAI ready")
         else:
             logger.warning("⚠️  No OPENAI_API_KEY found — AI features disabled")
     except ImportError:
