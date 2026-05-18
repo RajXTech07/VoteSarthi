@@ -111,10 +111,46 @@
   margin-left: .5em;
 }
 
+.secondaryAuthGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
 .googleBtnWrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.googleBtnWrapper button {
+  width: 100%;
+  justify-content: center;
+}
+
+.secondaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: white;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+.secondaryBtn:hover {
+  background: #f8f9fa;
+  border-color: #d2d4d7;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .toggleText {

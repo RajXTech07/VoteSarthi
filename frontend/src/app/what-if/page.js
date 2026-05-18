@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const scenarios = [
   {
@@ -39,6 +40,14 @@ const scenarios = [
 ];
 
 export default function WhatIfPage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!localStorage.getItem("votesarthi_session")) {
+      router.push("/login");
+    }
+  }, [router]);
+
   const [active, setActive] = useState(null);
 
   return (

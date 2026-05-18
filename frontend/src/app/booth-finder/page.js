@@ -1,9 +1,18 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function BoothFinderPage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!localStorage.getItem("votesarthi_session")) {
+      router.push("/login");
+    }
+  }, [router]);
+
   const [pincode, setPincode] = useState("");
   const [area, setArea] = useState("");
   const [searchDone, setSearchDone] = useState(false);

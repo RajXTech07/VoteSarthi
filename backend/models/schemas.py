@@ -1,37 +1,36 @@
 from pydantic import BaseModel, Field
-from typing import Optional, Literal
+from typing import Optional, Literal, List
 
 
 # ── Auth ─────────────────────────────────────────────────────
 
-class AuthRequest(BaseModel):
-    token: str = Field(..., description="Google ID Token")
+class FirebaseTokenRequest(BaseModel):
+    token: str = Field(..., description="Firebase ID Token")
 
 class User(BaseModel):
     email: Optional[str] = None
     name: Optional[str] = None
     picture: Optional[str] = None
-    sub: str = Field(..., description="Unique user ID")
+    uid: str = Field(..., description="Firebase unique user ID")
     mobile_number: Optional[str] = None
     gender: Optional[str] = None
     dob: Optional[str] = None
-
-class AuthResponse(BaseModel):
-    user: User
-    session_token: str = Field(..., description="Internal session token")
-
-class OTPRequest(BaseModel):
-    mobile_number: str
-
-class OTPVerifyRequest(BaseModel):
-    mobile_number: str
-    otp: str
+    state: Optional[str] = None
+    district: Optional[str] = None
 
 class ProfileUpdateRequest(BaseModel):
     name: Optional[str] = None
     gender: Optional[str] = None
     dob: Optional[str] = None
     email: Optional[str] = None
+    state: Optional[str] = None
+    district: Optional[str] = None
+    picture: Optional[str] = None
+
+class IssueReportRequest(BaseModel):
+    title: str = Field(..., description="Short title of the issue")
+    description: str = Field(..., description="Detailed description of the issue")
+    category: str = Field(default="General", description="Category of the issue")
 
 
 # ── Next Action (returned by every API) ──────────────────────

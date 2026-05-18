@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 import AuthBadge from "./AuthBadge";
 
 const navStructure = [
   { href: "/", label: "Home" },
+  { href: "/dashboard", label: "Dashboard" },
   {
     label: "Get Started",
     subLinks: [
@@ -32,20 +33,57 @@ const navStructure = [
       { href: "/booth-finder", label: "Find Booth" },
     ],
   },
-  {
-    label: "Help",
-    subLinks: [
-      { href: "/faq", label: "FAQ" },
-      { href: "/contact", label: "Contact" },
-    ],
-  },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return;
+
+    // Flatten all nav links to search through them
+    const allLinks = navStructure.flatMap(item => {
+      if (item.href) return [{ label: item.label.toLowerCase(), href: item.href }];
+      if (item.subLinks) return item.subLinks.map(sub => ({ label: sub.label.toLowerCase(), href: sub.href }));
+      return [];
+    });
+
+    // Find first match
+    const match = allLinks.find(link => link.label.includes(q) || q.includes(link.label));
+
+    if (match) {
+      router.push(match.href);
+    } else {
+      // Fallbacks
+      if (q.includes("eligibility") || q.includes("voter id")) router.push("/eligibility");
+      else if (q.includes("step") || q.includes("vote")) router.push("/steps");
+      else if (q.includes("news") || q.includes("timeline")) router.push("/timeline");
+      else if (q.includes("report") || q.includes("issue")) router.push("/report");
+      else if (q.includes("faq") || q.includes("question")) router.push("/faq");
+      else if (q.includes("simulation") || q.includes("game")) router.push("/simulation");
+      else if (q.includes("booth") || q.includes("find")) router.push("/booth-finder");
+      else window.alert(`Sorry, no exact page found for "${searchQuery}".`);
+    }
+    setSearchQuery("");
+  };
+
+  useEffect(() => {
+    const checkLogin = () => {
+      setIsLoggedIn(!!localStorage.getItem("votesarthi_session"));
+    };
+    checkLogin();
+    const interval = setInterval(checkLogin, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -88,6 +126,10 @@ export default function Navbar() {
 
         <div className={`${styles.links} ${menuOpen ? styles.open : ""}`}>
           {navStructure.map((item) => {
+            // Dynamic filtering based on auth state
+            if (isLoggedIn && (item.label === "Home" || item.label === "Get Started")) return null;
+            if (!isLoggedIn && item.label === "Dashboard") return null;
+
             if (item.href) {
               return (
                 <Link
@@ -125,6 +167,24 @@ export default function Navbar() {
         </div>
 
         <div className={styles.rightSection}>
+          <div className={styles.toolsArea}>
+            <form className={styles.searchForm} onSubmit={handleSearch}>
+              <input 
+                type="text" 
+                placeholder="Search..." 
+                className={styles.searchInput}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button type="submit" className={styles.searchBtn}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </button>
+            </form>
+          </div>
+
           <AuthBadge />
 
           <button

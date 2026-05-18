@@ -1,11 +1,20 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import NextAction from "@/components/NextAction";
 import styles from "./page.module.css";
 
 export default function TimelinePage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!localStorage.getItem("votesarthi_session")) {
+      router.push("/login");
+    }
+  }, [router]);
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

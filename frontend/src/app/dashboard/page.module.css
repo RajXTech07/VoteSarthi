@@ -1,0 +1,578 @@
+/* ══════════════════════════════════════════════════════════
+   Dashboard — Bento Grid Layout
+   Dark theme with glassmorphism, saffron + green accents
+   ══════════════════════════════════════════════════════════ */
+
+.page {
+  padding: 120px 0 80px;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.header {
+  margin-bottom: 40px;
+}
+
+.greeting {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.headerSub {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Bento Grid — 3 columns on desktop, responsive
+   ══════════════════════════════════════════════════════════ */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+/* Card base */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 28px;
+  transition: var(--transition);
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.card:hover {
+  background: var(--surface-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+/* ── Card Title (shared) ── */
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.cardLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Card 1: Eligibility Status — spans 2 columns
+   ══════════════════════════════════════════════════════════ */
+.eligibility {
+  grid-column: span 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  animation-delay: 0.05s;
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  background: rgba(19, 136, 8, 0.08);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eligibilityContent {
+  flex: 1;
+}
+
+.eligibilityTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 6px 0 16px;
+  color: var(--text-primary);
+}
+
+.eligibilityChecks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.checkIcon {
+  font-size: 1rem;
+}
+
+.verified {
+  color: var(--green-light);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.cardBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+  color: var(--navy);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.cardBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-saffron);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Card 2: Election Timeline — spans 1 column
+   ══════════════════════════════════════════════════════════ */
+.timeline {
+  grid-column: span 1;
+  animation-delay: 0.1s;
+}
+
+.timelineTrack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.timelineStep {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+  position: relative;
+}
+
+/* Vertical connector line */
+.timelineStep:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 38px;
+  width: 2px;
+  height: calc(100% - 22px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.timelineStep.done:not(:last-child)::after {
+  background: var(--green);
+}
+
+.timelineDot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.timelineStep.done .timelineDot {
+  border-color: var(--green);
+  background: rgba(19, 136, 8, 0.15);
+}
+
+.timelineStep.active .timelineDot {
+  border-color: var(--saffron);
+  background: rgba(255, 153, 51, 0.15);
+  box-shadow: 0 0 12px rgba(255, 153, 51, 0.3);
+}
+
+.timelineLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.timelineStep.done .timelineLabel {
+  color: var(--green-light);
+}
+
+.timelineStep.active .timelineLabel {
+  color: var(--saffron-light);
+  font-weight: 600;
+}
+
+.timelineLink {
+  font-size: 0.85rem;
+  color: var(--saffron);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.timelineLink:hover {
+  color: var(--saffron-light);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Card 3: Polling Station Finder
+   ══════════════════════════════════════════════════════════ */
+.polling {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  animation-delay: 0.15s;
+}
+
+.pollingIcon {
+  width: 64px;
+  height: 64px;
+  background: rgba(255, 153, 51, 0.08);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.pollingBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  color: var(--white);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: var(--transition);
+}
+
+.pollingBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-green);
+}
+
+.pollingHint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Card 4: Smart Election Assistant
+   ══════════════════════════════════════════════════════════ */
+.assistant {
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.06), rgba(255, 153, 51, 0.02));
+  border-color: rgba(255, 153, 51, 0.2);
+  animation-delay: 0.2s;
+}
+
+.assistant:hover {
+  border-color: rgba(255, 153, 51, 0.35);
+}
+
+.assistantHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.assistantIcon {
+  font-size: 1.6rem;
+}
+
+.assistantTitle {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.assistantDesc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.assistantBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+  color: var(--navy);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.assistantBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-saffron);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Card 5: Voter Guide & Resources
+   ══════════════════════════════════════════════════════════ */
+.resources {
+  animation-delay: 0.25s;
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.resourceItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: var(--transition);
+}
+
+.resourceItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 153, 51, 0.2);
+  transform: translateY(-2px);
+}
+
+.resourceIcon {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+
+.resourceLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.resourceArrow {
+  font-size: 0.78rem;
+  color: var(--saffron);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Card 6: Latest News Feed
+   ══════════════════════════════════════════════════════════ */
+.newsFeed {
+  animation-delay: 0.3s;
+}
+
+.newsScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.newsScroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.newsScroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.newsItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: var(--transition);
+}
+
+.newsItem:last-child {
+  border-bottom: none;
+}
+
+.newsItem:hover {
+  background: rgba(255, 255, 255, 0.03);
+  padding-left: 8px;
+  border-radius: 8px;
+}
+
+.newsText {
+  flex: 1;
+  min-width: 0;
+}
+
+.newsTitle {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.newsMeta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.newsThumb {
+  width: 64px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.newsLoading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--saffron);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.newsEmpty {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 20px 0;
+}
+
+/* ── Skeleton Loaders ── */
+.skeleton {
+  pointer-events: none;
+}
+
+.skeletonText {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+.skeletonTitle {
+  width: 100%;
+  height: 18px;
+  margin-bottom: 8px;
+}
+
+.skeletonMeta {
+  width: 60%;
+  height: 12px;
+}
+
+.skeletonThumb {
+  background: rgba(255, 255, 255, 0.05);
+  animation: pulse 1.5s infinite;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Animation
+   ══════════════════════════════════════════════════════════ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   Responsive — Tablet
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .eligibility {
+    grid-column: span 2;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   Responsive — Mobile
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .page {
+    padding: 100px 0 60px;
+  }
+
+  .bentoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eligibility {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .eligibilityChecks {
+    align-items: center;
+  }
+
+  .resourceGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

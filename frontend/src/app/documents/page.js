@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import styles from "./page.module.css";
 
@@ -32,18 +33,23 @@ const STATUS_CONFIG = {
 };
 
 export default function DocumentsPage() {
+  const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
+    if (!localStorage.getItem("votesarthi_session")) {
+      router.push("/login");
+      return;
+    }
     api
       .getDocuments()
       .then(setData)
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, []);
+  }, [router]);
 
   if (loading) {
     return (

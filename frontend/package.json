@@ -18,11 +18,11 @@
     "@radix-ui/react-scroll-area": "^1.2.10",
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
-    "@react-oauth/google": "^0.13.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "firebase": "^12.13.0",
     "lucide-react": "^1.14.0",
-    "next": "latest",
+    "next": "^16.2.4",
     "react": "latest",
     "react-dom": "latest",
     "react-resizable-panels": "^4.10.0",
@@ -35,5 +35,8 @@
     "postcss": "^8.5.13",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "postcss": "^8.5.13"
   }
 }

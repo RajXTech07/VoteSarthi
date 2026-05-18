@@ -1,44 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
-import { useRouter } from "next/navigation";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../lib/firebase";
 import { api } from "../lib/api";
+import { useRouter } from "next/navigation";
 import styles from "./Navbar.module.css";
 
-export default function GoogleAuthButton() {
+export default function GoogleAuthButton({ isFullWidth = false }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setLoading(true);
-      try {
-        const userInfo = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        }).then(res => res.json());
-
-        const data = await api.googleProfileAuth(userInfo);
-        
-        localStorage.setItem("votesarthi_session", data.session_token);
-        localStorage.setItem("votesarthi_user", JSON.stringify(data.user));
-        
-        router.push("/profile");
-      } catch (err) {
-        console.error("Auth error:", err);
-      } finally {
-        setLoading(false);
-      }
-    },
-    onError: () => console.error("Login Failed"),
-  });
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      
+      // Get the secure ID Token
+      const idToken = await result.user.getIdToken();
+      
+      // Send the token to FastAPI backend
+      const response = await api.verifyFirebaseToken(idToken);
+      
+      localStorage.setItem("votesarthi_session", idToken);
+      localStorage.setItem("votesarthi_user", JSON.stringify(response.user));
+      
+      router.push("/profile");
+    } catch (err) {
+      console.error("Auth error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className={styles.authWrapper}>
+    <div className={styles.authWrapper} style={isFullWidth ? { width: "100%" } : {}}>
       <button 
-        onClick={() => login()} 
+        onClick={handleGoogleLogin} 
         className={styles.signInBtn}
         disabled={loading}
+        style={isFullWidth ? { width: "100%", justifyContent: "center" } : {}}
       >
         <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>

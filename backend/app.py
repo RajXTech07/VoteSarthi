@@ -21,12 +21,22 @@ from routes.explain import router as explain_router
 from routes.context import router as context_router
 from routes.documents import router as documents_router
 from routes.auth import router as auth_router
+from routes.issues import router as issues_router
+from routes.news import router as news_router
+
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from services.limiter import limiter
 
 app = FastAPI(
     title="VoteSarthi API",
     description="Smart assistant helping Indian citizens understand the election process",
     version="2.0.0",
 )
+
+# Setup Rate Limiting
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS — allow Next.js frontend (dev + prod)
 app.add_middleware(
@@ -46,6 +56,8 @@ app.include_router(explain_router)
 app.include_router(context_router)
 app.include_router(documents_router)
 app.include_router(auth_router)
+app.include_router(issues_router)
+app.include_router(news_router)
 
 
 @app.get("/api/health")

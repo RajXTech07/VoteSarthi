@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { googleLogout } from "@react-oauth/google";
+import { signOut } from "firebase/auth";
+import { auth } from "../lib/firebase";
 import styles from "./AuthBadge.module.css";
 
 export default function AuthBadge() {
@@ -46,8 +47,12 @@ export default function AuthBadge() {
     };
   }, []);
 
-  const handleLogout = () => {
-    googleLogout();
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out from Firebase:", error);
+    }
     localStorage.removeItem("votesarthi_session");
     localStorage.removeItem("votesarthi_user");
     setUser(null);

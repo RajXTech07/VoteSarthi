@@ -242,6 +242,79 @@
   gap: 16px;
 }
 
+.toolsArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  padding: 4px 12px;
+  transition: all 0.3s ease;
+}
+
+.searchForm:focus-within {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 153, 51, 0.5);
+  box-shadow: 0 0 0 2px rgba(255, 153, 51, 0.2);
+}
+
+.searchInput {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  width: 120px;
+  outline: none;
+  transition: width 0.3s ease;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.searchInput:focus {
+  width: 160px;
+}
+
+.searchBtn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+.searchBtn:hover {
+  color: var(--saffron);
+}
+
+.langToggle {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  border-radius: 100px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.langToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 .authWrapper {
   display: flex;
   flex-direction: column;

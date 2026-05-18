@@ -1,4 +1,5 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
+from services.limiter import limiter
 from models.schemas import ExplainRequest, ExplainResponse
 from services.ai_service import explain_eligibility, explain_steps, explain_timeline
 from services.steps_service import get_voting_steps
@@ -8,7 +9,8 @@ router = APIRouter(prefix="/api/explain", tags=["AI Explanation"])
 
 
 @router.post("/", response_model=ExplainResponse)
-def explain(req: ExplainRequest):
+@limiter.limit("5/minute")
+def explain(request: Request, req: ExplainRequest):
     """
     Unified AI explanation endpoint.
     Takes context + data and returns a grounded, plain-language explanation.

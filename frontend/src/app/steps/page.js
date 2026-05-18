@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import NextAction from "@/components/NextAction";
 import styles from "./page.module.css";
@@ -18,6 +19,14 @@ const icons = {
 };
 
 export default function StepsPage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!localStorage.getItem("votesarthi_session")) {
+      router.push("/login");
+    }
+  }, [router]);
+
   // Context form
   const [age, setAge] = useState("");
   const [hasVoterId, setHasVoterId] = useState(null);

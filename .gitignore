@@ -15,3 +15,4 @@ frontend/.env.local
 .DS_Store
 
 .venv/
+firebase-credentials.json

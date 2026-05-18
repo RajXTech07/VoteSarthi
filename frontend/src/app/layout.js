@@ -9,17 +9,34 @@ export const metadata = {
   keywords: "India elections, voter guide, VoteSarthi, voting steps, eligibility checker",
 };
 
-import AuthProvider from "@/components/AuthProvider";
+import Script from "next/script";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <Script id="google-translate-config" strategy="afterInteractive">
+          {`
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+              }, 'google_translate_element');
+            }
+          `}
+        </Script>
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+      </head>
       <body>
-        <AuthProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </AuthProvider>
+        <Navbar />
+        {/* Hidden translate element that our Navbar button will trigger */}
+        <div id="google_translate_element" style={{ display: "none" }}></div>
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

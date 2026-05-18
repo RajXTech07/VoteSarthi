@@ -69,29 +69,34 @@ export const api = {
   // Document Validator
   getDocuments: () => request("/api/documents/"),
 
-  googleProfileAuth: (profile) =>
-    request("/api/auth/profile", {
+  verifyFirebaseToken: (token) =>
+    request("/api/auth/verify", {
       method: "POST",
-      body: JSON.stringify(profile),
-    }),
-
-  sendOTP: (mobile_number) =>
-    request("/api/auth/otp/send", {
-      method: "POST",
-      body: JSON.stringify({ mobile_number }),
-    }),
-
-  verifyOTP: (mobile_number, otp) =>
-    request("/api/auth/otp/verify", {
-      method: "POST",
-      body: JSON.stringify({ mobile_number, otp }),
+      body: JSON.stringify({ token }),
     }),
 
   updateProfile: (session_token, data) =>
-    request(`/api/auth/profile?session_token=${session_token}`, {
+    request("/api/auth/profile", {
       method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${session_token}`
+      },
       body: JSON.stringify(data),
     }),
+
+  reportIssue: (session_token, data) =>
+    request("/api/issues/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${session_token}`
+      },
+      body: JSON.stringify(data),
+    }),
+
+  // News Feed
+  getNews: () => request("/api/news/"),
 
   health: () => request("/api/health"),
 };
