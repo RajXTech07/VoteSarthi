@@ -6,8 +6,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { api } from "../../lib/api";
 import { auth, storage } from "../../lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styles from "./page.module.css";
+
+// Helper: wait for Firebase to restore auth state, then get a fresh token
+function getFirebaseToken() {
+  return new Promise((resolve, reject) => {
+    if (auth.currentUser) {
+      auth.currentUser.getIdToken(true).then(resolve).catch(reject);
+      return;
+    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe();
+      if (user) {
+        user.getIdToken(true).then(resolve).catch(reject);
+      } else {
+        reject(new Error("No authenticated user"));
+      }
+    });
+    setTimeout(() => { unsubscribe(); reject(new Error("Auth timeout")); }, 5000);
+  });
+}
 
 export default function Profile() {
   const router = useRouter();
@@ -121,12 +141,14 @@ export default function Profile() {
   const handleSave = async () => {
     setLoading(true);
     try {
-      // Get a fresh token from Firebase (the stored one may have expired after 1 hour)
-      let sessionToken = localStorage.getItem("votesarthi_session");
-      
-      if (auth.currentUser) {
-        sessionToken = await auth.currentUser.getIdToken(true);
+      // Wait for Firebase to restore auth and get a FRESH token
+      let sessionToken;
+      try {
+        sessionToken = await getFirebaseToken();
         localStorage.setItem("votesarthi_session", sessionToken);
+      } catch (authErr) {
+        console.warn("⚠️ Could not get fresh token:", authErr.message);
+        sessionToken = localStorage.getItem("votesarthi_session");
       }
       
       if (!sessionToken) {
