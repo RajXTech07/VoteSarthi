@@ -28,11 +28,23 @@ export default function Login() {
     // Get the secure ID Token
     const idToken = await result.user.getIdToken();
     
-    // Send the token to FastAPI backend
-    const response = await api.verifyFirebaseToken(idToken);
-    
+    // Save session immediately (Firebase is the source of truth)
     localStorage.setItem("votesarthi_session", idToken);
-    localStorage.setItem("votesarthi_user", JSON.stringify(response.user));
+    
+    // Try to sync with backend (best-effort — don't block login if backend is down)
+    try {
+      const response = await api.verifyFirebaseToken(idToken);
+      localStorage.setItem("votesarthi_user", JSON.stringify(response.user));
+    } catch (backendErr) {
+      console.warn("Backend sync failed (will retry later):", backendErr.message);
+      // Save basic user info from Firebase directly
+      localStorage.setItem("votesarthi_user", JSON.stringify({
+        name: result.user.displayName || "",
+        email: result.user.email || "",
+        picture: result.user.photoURL || "",
+        uid: result.user.uid,
+      }));
+    }
     
     router.push("/profile");
   };
