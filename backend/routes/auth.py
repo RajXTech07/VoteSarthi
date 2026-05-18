@@ -42,14 +42,18 @@ async def verify_login(request: Request, body: FirebaseTokenRequest):
             "name": name,
             "picture": picture,
             "gender": None,
-            "dob": None
+            "dob": None,
+            "state": None,
+            "district": None,
         }
         user_ref.set(user_data)
         return {"user": user_data}
     
-    return {"user": doc.to_dict()}
+    existing = doc.to_dict()
+    existing["uid"] = uid
+    return {"user": existing}
 
-@router.put("/profile", response_model=User)
+@router.put("/profile")
 @limiter.limit("10/minute")
 async def update_profile(request: Request, profile_update: ProfileUpdateRequest, uid: str = Depends(get_current_uid)):
     """Updates the user profile securely based on their verified token."""
@@ -59,14 +63,17 @@ async def update_profile(request: Request, profile_update: ProfileUpdateRequest,
     if not doc.exists:
         raise HTTPException(status_code=404, detail="User not found")
         
-    # Only update fields that were provided
-    update_data = {k: v for k, v in profile_update.dict().items() if v is not None}
+    # Only update fields that were provided and are not empty strings
+    update_data = {k: v for k, v in profile_update.dict().items() if v is not None and v != ""}
     
     if update_data:
         user_ref.update(update_data)
         
     updated_doc = user_ref.get()
-    return updated_doc.to_dict()
+    result = updated_doc.to_dict()
+    # Always ensure uid is present in the response
+    result["uid"] = uid
+    return result
 
 @router.get("/me", response_model=User)
 @limiter.limit("30/minute")

@@ -123,19 +123,38 @@ export default function Profile() {
     try {
       // Get a fresh token from Firebase (the stored one may have expired after 1 hour)
       let sessionToken = localStorage.getItem("votesarthi_session");
+      
       if (auth.currentUser) {
         sessionToken = await auth.currentUser.getIdToken(true);
         localStorage.setItem("votesarthi_session", sessionToken);
       }
       
-      const updatedUser = await api.updateProfile(sessionToken, formData);
+      if (!sessionToken) {
+        alert("Session expired. Please log in again.");
+        router.push("/login");
+        return;
+      }
+
+      // Clean formData — remove empty strings, send only real values
+      const cleanData = {};
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value && value.trim() !== "") {
+          cleanData[key] = value.trim();
+        }
+      });
+      
+      console.log("📤 Saving profile:", cleanData);
+      
+      const updatedUser = await api.updateProfile(sessionToken, cleanData);
+      
+      console.log("✅ Profile saved:", updatedUser);
       
       setUser(updatedUser);
       localStorage.setItem("votesarthi_user", JSON.stringify(updatedUser));
       setIsEditing(false);
     } catch (err) {
-      console.error("Failed to save profile", err);
-      alert("Failed to save profile. Please try again.");
+      console.error("❌ Failed to save profile:", err.message);
+      alert("Failed to save profile: " + err.message);
     } finally {
       setLoading(false);
     }
