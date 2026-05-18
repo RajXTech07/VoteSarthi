@@ -7,9 +7,13 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 async function request(endpoint, options = {}) {
   const url = `${API_BASE}${endpoint}`;
+  const { headers: customHeaders, ...restOptions } = options;
   const res = await fetch(url, {
-    headers: { "Content-Type": "application/json" },
-    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...customHeaders,
+    },
+    ...restOptions,
   });
 
   if (!res.ok) {

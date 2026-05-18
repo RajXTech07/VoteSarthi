@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { api } from "../../lib/api";
-import { storage } from "../../lib/firebase";
+import { auth, storage } from "../../lib/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styles from "./page.module.css";
 
@@ -121,7 +121,13 @@ export default function Profile() {
   const handleSave = async () => {
     setLoading(true);
     try {
-      const sessionToken = localStorage.getItem("votesarthi_session");
+      // Get a fresh token from Firebase (the stored one may have expired after 1 hour)
+      let sessionToken = localStorage.getItem("votesarthi_session");
+      if (auth.currentUser) {
+        sessionToken = await auth.currentUser.getIdToken(true);
+        localStorage.setItem("votesarthi_session", sessionToken);
+      }
+      
       const updatedUser = await api.updateProfile(sessionToken, formData);
       
       setUser(updatedUser);
