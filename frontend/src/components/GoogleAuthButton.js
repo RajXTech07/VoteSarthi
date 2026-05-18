@@ -17,18 +17,38 @@ export default function GoogleAuthButton({ isFullWidth = false }) {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       
+      console.log("✅ Google Sign-In successful:", result.user.email);
+      
       // Get the secure ID Token
       const idToken = await result.user.getIdToken();
       
-      // Send the token to FastAPI backend
-      const response = await api.verifyFirebaseToken(idToken);
-      
+      // Save session immediately (Firebase is the source of truth)
       localStorage.setItem("votesarthi_session", idToken);
-      localStorage.setItem("votesarthi_user", JSON.stringify(response.user));
+      
+      // Try to sync with backend (best-effort — don't block login)
+      try {
+        const response = await api.verifyFirebaseToken(idToken);
+        localStorage.setItem("votesarthi_user", JSON.stringify(response.user));
+        console.log("✅ Backend sync successful");
+      } catch (backendErr) {
+        console.warn("⚠️ Backend sync failed (login still works):", backendErr.message);
+        // Save basic user info from Firebase directly
+        localStorage.setItem("votesarthi_user", JSON.stringify({
+          name: result.user.displayName || "",
+          email: result.user.email || "",
+          picture: result.user.photoURL || "",
+          uid: result.user.uid,
+        }));
+      }
       
       router.push("/profile");
     } catch (err) {
-      console.error("Auth error:", err);
+      // Don't show error for user-cancelled popups
+      if (err.code === "auth/popup-closed-by-user" || err.code === "auth/cancelled-popup-request") {
+        console.log("ℹ️ User cancelled Google sign-in");
+      } else {
+        console.error("❌ Google Auth error:", err.code, err.message);
+      }
     } finally {
       setLoading(false);
     }
